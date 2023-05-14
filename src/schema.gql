@@ -37,7 +37,7 @@ type Mutation {
 }
 
 input CreateGameInput {
-  date: DateTime! = "2023-05-14T19:00:03.582Z"
+  date: DateTime! = "2023-05-14T22:06:51.019Z"
   p1_points: Int!
   p2_points: Int!
 }
