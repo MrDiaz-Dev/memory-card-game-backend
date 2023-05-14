@@ -12,34 +12,34 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GamesService = void 0;
+exports.MovesService = void 0;
 const common_1 = require("@nestjs/common");
-const game_entity_1 = require("../entities/game.entity");
 const typeorm_1 = require("@nestjs/typeorm");
+const move_entity_1 = require("../entities/move.entity");
 const typeorm_2 = require("typeorm");
-let GamesService = class GamesService {
-    constructor(gamesRepository) {
-        this.gamesRepository = gamesRepository;
+let MovesService = class MovesService {
+    constructor(movesRepository) {
+        this.movesRepository = movesRepository;
     }
-    async findAll() {
-        return this.gamesRepository.find();
+    create(createMoveInput) {
+        const newMove = this.movesRepository.create(createMoveInput);
+        return this.movesRepository.save(newMove);
     }
-    async findOne(game_id) {
-        return this.gamesRepository.findOne({
+    findAll() {
+        return this.movesRepository.find();
+    }
+    findOne(move_id) {
+        return this.movesRepository.findOne({
             where: {
-                game_id,
+                move_id,
             },
         });
     }
-    async createGame(game) {
-        const newGame = this.gamesRepository.create(game);
-        return this.gamesRepository.save(newGame);
-    }
 };
-GamesService = __decorate([
+MovesService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, typeorm_1.InjectRepository)(game_entity_1.Game)),
+    __param(0, (0, typeorm_1.InjectRepository)(move_entity_1.Move)),
     __metadata("design:paramtypes", [typeorm_2.Repository])
-], GamesService);
-exports.GamesService = GamesService;
-//# sourceMappingURL=games.service.js.map
+], MovesService);
+exports.MovesService = MovesService;
+//# sourceMappingURL=moves.service.js.map

@@ -8,18 +8,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GamesResolver = void 0;
 const graphql_1 = require("@nestjs/graphql");
 const games_service_1 = require("./games.service");
 const graphql_2 = require("@nestjs/graphql");
-const game_entity_1 = require("./entitys/game.entity");
+const game_entity_1 = require("../entities/game.entity");
+const create_game_input_1 = require("../DTOs/create-game.input");
 let GamesResolver = class GamesResolver {
     constructor(gamesService) {
         this.gamesService = gamesService;
     }
     getGames() {
         return this.gamesService.findAll();
+    }
+    getGameByID(game_id) {
+        return this.gamesService.findOne(game_id);
+    }
+    createGame(gameInput) {
+        return this.gamesService.createGame(gameInput);
     }
 };
 __decorate([
@@ -28,6 +38,20 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], GamesResolver.prototype, "getGames", null);
+__decorate([
+    (0, graphql_2.Query)((returns) => game_entity_1.Game),
+    __param(0, (0, graphql_1.Args)('game_id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], GamesResolver.prototype, "getGameByID", null);
+__decorate([
+    (0, graphql_1.Mutation)((returns) => game_entity_1.Game),
+    __param(0, (0, graphql_1.Args)('gameInput')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [create_game_input_1.CreateGameInput]),
+    __metadata("design:returntype", void 0)
+], GamesResolver.prototype, "createGame", null);
 GamesResolver = __decorate([
     (0, graphql_1.Resolver)(),
     __metadata("design:paramtypes", [games_service_1.GamesService])

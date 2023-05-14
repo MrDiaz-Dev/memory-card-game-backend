@@ -2,11 +2,21 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Move {
+  move_id: Int!
+  game_id: Int!
+  turn: Int!
+  player: Int!
+  card_number: Int!
+  game: Game!
+}
+
 type Game {
   game_id: Int!
   date: DateTime!
   p1_points: Int!
   p2_points: Int!
+  Moves: [Move!]
 }
 
 """
@@ -16,4 +26,27 @@ scalar DateTime
 
 type Query {
   getGames: [Game!]!
+  getGameByID(game_id: Float!): Game!
+  getMoves: [Move!]!
+  getMove(id: Int!): Move!
+}
+
+type Mutation {
+  createGame(gameInput: CreateGameInput!): Game!
+  createMove(createMoveInput: CreateMoveInput!): Move!
+}
+
+input CreateGameInput {
+  date: DateTime! = "2023-05-14T19:00:03.582Z"
+  p1_points: Int!
+  p2_points: Int!
+}
+
+input CreateMoveInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+  game_id: Int!
+  turn: Int!
+  player: Int!
+  card_number: Int!
 }

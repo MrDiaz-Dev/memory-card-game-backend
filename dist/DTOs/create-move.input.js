@@ -9,33 +9,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Game = void 0;
+exports.CreateMoveInput = void 0;
 const graphql_1 = require("@nestjs/graphql");
-const typeorm_1 = require("typeorm");
-let Game = class Game {
+let CreateMoveInput = class CreateMoveInput {
 };
 __decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)(),
+    (0, graphql_1.Field)(() => graphql_1.Int, { description: 'Example field (placeholder)' }),
+    __metadata("design:type", Number)
+], CreateMoveInput.prototype, "exampleField", void 0);
+__decorate([
     (0, graphql_1.Field)((type) => graphql_1.Int),
     __metadata("design:type", Number)
-], Game.prototype, "game_id", void 0);
+], CreateMoveInput.prototype, "game_id", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'timestamptz' }),
-    (0, graphql_1.Field)(),
-    __metadata("design:type", Date)
-], Game.prototype, "date", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
     (0, graphql_1.Field)((type) => graphql_1.Int),
     __metadata("design:type", Number)
-], Game.prototype, "p1_points", void 0);
+], CreateMoveInput.prototype, "turn", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
     (0, graphql_1.Field)((type) => graphql_1.Int),
     __metadata("design:type", Number)
-], Game.prototype, "p2_points", void 0);
-Game = __decorate([
-    (0, graphql_1.ObjectType)()
-], Game);
-exports.Game = Game;
-//# sourceMappingURL=game.entity.js.map
+], CreateMoveInput.prototype, "player", void 0);
+__decorate([
+    (0, graphql_1.Field)((type) => graphql_1.Int),
+    __metadata("design:type", Number)
+], CreateMoveInput.prototype, "card_number", void 0);
+CreateMoveInput = __decorate([
+    (0, graphql_1.InputType)()
+], CreateMoveInput);
+exports.CreateMoveInput = CreateMoveInput;
+//# sourceMappingURL=create-move.input.js.map

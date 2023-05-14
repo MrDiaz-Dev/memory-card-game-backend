@@ -11,6 +11,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { MovesModule } from './moves/moves.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       retryAttempts: 10, // when someting occurs the db will retry to connect max 10 times
       retryDelay: 3000, // 3s between each retry
     }),
+    MovesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

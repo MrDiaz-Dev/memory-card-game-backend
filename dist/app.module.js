@@ -15,6 +15,7 @@ const graphql_1 = require("@nestjs/graphql");
 const apollo_1 = require("@nestjs/apollo");
 const path_1 = require("path");
 const typeorm_1 = require("@nestjs/typeorm");
+const moves_module_1 = require("./moves/moves.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -37,6 +38,7 @@ AppModule = __decorate([
                 retryAttempts: 10,
                 retryDelay: 3000,
             }),
+            moves_module_1.MovesModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

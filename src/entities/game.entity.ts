@@ -1,6 +1,13 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  PrimaryGeneratedColumn,
+  Entity,
+  OneToMany,
+} from 'typeorm';
+import { Move } from './move.entity';
 
+@Entity()
 @ObjectType()
 export class Game {
   @PrimaryGeneratedColumn()
@@ -18,4 +25,8 @@ export class Game {
   @Column()
   @Field((type) => Int)
   p2_points: number;
+
+  @OneToMany( () => Move, move => move.game )
+  @Field( () => [Move], { nullable: true } ) 
+  Moves: Move[];
 }
