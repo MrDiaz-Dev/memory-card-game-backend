@@ -17,9 +17,11 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const move_entity_1 = require("../entities/move.entity");
 const typeorm_2 = require("typeorm");
+const games_service_1 = require("../games/games.service");
 let MovesService = class MovesService {
-    constructor(movesRepository) {
+    constructor(movesRepository, gamesService) {
         this.movesRepository = movesRepository;
+        this.gamesService = gamesService;
     }
     create(createMoveInput) {
         const newMove = this.movesRepository.create(createMoveInput);
@@ -35,11 +37,21 @@ let MovesService = class MovesService {
             },
         });
     }
+    async getGame(game_id) {
+        return this.gamesService.findOne(game_id);
+    }
+    async find_all_of_one_game(game_id) {
+        return this.movesRepository.findBy({
+            game_id,
+        });
+    }
 };
 MovesService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(move_entity_1.Move)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __param(1, (0, common_1.Inject)((0, common_1.forwardRef)(() => games_service_1.GamesService))),
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        games_service_1.GamesService])
 ], MovesService);
 exports.MovesService = MovesService;
 //# sourceMappingURL=moves.service.js.map

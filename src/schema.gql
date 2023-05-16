@@ -9,6 +9,7 @@ type Move {
   player: Int!
   card_number: Int!
   game: Game!
+  getGame: Game!
 }
 
 type Game {
@@ -17,6 +18,7 @@ type Game {
   p1_points: Int!
   p2_points: Int!
   Moves: [Move!]
+  getMoves: [Move!]!
 }
 
 """
@@ -26,25 +28,24 @@ scalar DateTime
 
 type Query {
   getGames: [Game!]!
-  getGameByID(game_id: Float!): Game!
+  getGameByID(game_id: Int!): Game!
   getMoves: [Move!]!
   getMove(id: Int!): Move!
 }
 
 type Mutation {
   createGame(gameInput: CreateGameInput!): Game!
+  updateGamePoints(game_id: Int!, player_n: Int!): Game!
   createMove(createMoveInput: CreateMoveInput!): Move!
 }
 
 input CreateGameInput {
-  date: DateTime! = "2023-05-14T22:06:51.019Z"
+  date: DateTime! = "2023-05-16T08:11:41.206Z"
   p1_points: Int!
   p2_points: Int!
 }
 
 input CreateMoveInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
   game_id: Int!
   turn: Int!
   player: Int!

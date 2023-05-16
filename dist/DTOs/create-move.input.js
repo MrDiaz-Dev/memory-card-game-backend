@@ -14,10 +14,6 @@ const graphql_1 = require("@nestjs/graphql");
 let CreateMoveInput = class CreateMoveInput {
 };
 __decorate([
-    (0, graphql_1.Field)(() => graphql_1.Int, { description: 'Example field (placeholder)' }),
-    __metadata("design:type", Number)
-], CreateMoveInput.prototype, "exampleField", void 0);
-__decorate([
     (0, graphql_1.Field)((type) => graphql_1.Int),
     __metadata("design:type", Number)
 ], CreateMoveInput.prototype, "game_id", void 0);

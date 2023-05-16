@@ -12,14 +12,14 @@ const moves_service_1 = require("./moves.service");
 const moves_resolver_1 = require("./moves.resolver");
 const typeorm_1 = require("@nestjs/typeorm");
 const move_entity_1 = require("../entities/move.entity");
+const games_module_1 = require("../games/games.module");
 let MovesModule = class MovesModule {
 };
 MovesModule = __decorate([
     (0, common_1.Module)({
-        imports: [
-            typeorm_1.TypeOrmModule.forFeature([move_entity_1.Move])
-        ],
-        providers: [moves_resolver_1.MovesResolver, moves_service_1.MovesService]
+        imports: [typeorm_1.TypeOrmModule.forFeature([move_entity_1.Move]), (0, common_1.forwardRef)(() => games_module_1.GamesModule)],
+        providers: [moves_resolver_1.MovesResolver, moves_service_1.MovesService],
+        exports: [moves_service_1.MovesService],
     })
 ], MovesModule);
 exports.MovesModule = MovesModule;

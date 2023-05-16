@@ -1,9 +1,10 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int, ResolveField, Parent } from '@nestjs/graphql';
 import { MovesService } from './moves.service';
 import { Move } from '../entities/move.entity';
 import { CreateMoveInput } from '../DTOs/create-move.input';
+import { Game } from 'src/entities/game.entity';
 
-@Resolver(() => Move)
+@Resolver((of) => Move)
 export class MovesResolver {
   constructor(private readonly movesService: MovesService) {}
 
@@ -21,4 +22,10 @@ export class MovesResolver {
   findOne(@Args('id', { type: () => Int }) move_id: number) {
     return this.movesService.findOne(move_id);
   }
+
+  @ResolveField( (returns) => Game )
+  getGame( @Parent() move: Move ): Promise<Game> {
+    return this.movesService.getGame(move.game_id);
+  }
+
 }

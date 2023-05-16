@@ -12,12 +12,14 @@ const games_service_1 = require("./games.service");
 const games_resolver_1 = require("./games.resolver");
 const typeorm_1 = require("@nestjs/typeorm");
 const game_entity_1 = require("../entities/game.entity");
+const moves_module_1 = require("../moves/moves.module");
 let GamesModule = class GamesModule {
 };
 GamesModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([game_entity_1.Game])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([game_entity_1.Game]), (0, common_1.forwardRef)(() => moves_module_1.MovesModule)],
         providers: [games_service_1.GamesService, games_resolver_1.GamesResolver],
+        exports: [games_service_1.GamesService],
     })
 ], GamesModule);
 exports.GamesModule = GamesModule;

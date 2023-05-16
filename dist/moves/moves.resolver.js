@@ -17,6 +17,7 @@ const graphql_1 = require("@nestjs/graphql");
 const moves_service_1 = require("./moves.service");
 const move_entity_1 = require("../entities/move.entity");
 const create_move_input_1 = require("../DTOs/create-move.input");
+const game_entity_1 = require("../entities/game.entity");
 let MovesResolver = class MovesResolver {
     constructor(movesService) {
         this.movesService = movesService;
@@ -29,6 +30,9 @@ let MovesResolver = class MovesResolver {
     }
     findOne(move_id) {
         return this.movesService.findOne(move_id);
+    }
+    getGame(move) {
+        return this.movesService.getGame(move.game_id);
     }
 };
 __decorate([
@@ -51,8 +55,15 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], MovesResolver.prototype, "findOne", null);
+__decorate([
+    (0, graphql_1.ResolveField)((returns) => game_entity_1.Game),
+    __param(0, (0, graphql_1.Parent)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [move_entity_1.Move]),
+    __metadata("design:returntype", Promise)
+], MovesResolver.prototype, "getGame", null);
 MovesResolver = __decorate([
-    (0, graphql_1.Resolver)(() => move_entity_1.Move),
+    (0, graphql_1.Resolver)((of) => move_entity_1.Move),
     __metadata("design:paramtypes", [moves_service_1.MovesService])
 ], MovesResolver);
 exports.MovesResolver = MovesResolver;

@@ -17,9 +17,11 @@ const common_1 = require("@nestjs/common");
 const game_entity_1 = require("../entities/game.entity");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
+const moves_service_1 = require("../moves/moves.service");
 let GamesService = class GamesService {
-    constructor(gamesRepository) {
+    constructor(gamesRepository, movesService) {
         this.gamesRepository = gamesRepository;
+        this.movesService = movesService;
     }
     async findAll() {
         return this.gamesRepository.find();
@@ -35,11 +37,26 @@ let GamesService = class GamesService {
         const newGame = this.gamesRepository.create(game);
         return this.gamesRepository.save(newGame);
     }
+    async updateGamePoints(game_id, player_n) {
+        const gameToUptdate = await this.findOne(game_id);
+        if (player_n <= 1) {
+            gameToUptdate.p1_points += 1;
+        }
+        else {
+            gameToUptdate.p2_points += 1;
+        }
+        return this.gamesRepository.save(gameToUptdate);
+    }
+    async getMoves(game_id) {
+        return this.movesService.find_all_of_one_game(game_id);
+    }
 };
 GamesService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(game_entity_1.Game)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __param(1, (0, common_1.Inject)((0, common_1.forwardRef)(() => moves_service_1.MovesService))),
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        moves_service_1.MovesService])
 ], GamesService);
 exports.GamesService = GamesService;
 //# sourceMappingURL=games.service.js.map
