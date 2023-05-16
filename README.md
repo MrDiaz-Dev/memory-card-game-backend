@@ -47,15 +47,9 @@ $ npm run start:prod
 
 ## Test
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```first of all create a Postgres database called 'memory-game' and put your DB's access info in the TypeORM params in the "app.module.ts" file
+   run backend using the comand in terminal "npm run start:dev"
+   check Database status with the Graphql syntax in "localhost:3000/graphql", you can test all api functionalitys from her actually.
 ```
 
 ## Support
